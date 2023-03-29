@@ -14,8 +14,6 @@ Import-Module $PSScriptRoot\functions.ps1 -Force
 $clientid = $env:ARM_CLIENT_ID ### add email address of user with admin rights in powerBI
 $clientSecret = ConvertTo-SecureString $env:ARM_CLIENT_SECRET -AsPlainText -Force
 
-Write-Error "ClientID: $($clientid)."
-
 ## login to power BI
 Install-Module -Name MicrosoftPowerBIMgmt -Scope CurrentUser
 $credential = New-Object System.Management.Automation.PSCredential($clientid, $clientSecret)
