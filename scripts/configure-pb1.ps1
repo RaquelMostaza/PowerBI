@@ -7,7 +7,7 @@ if (!$config) {
   exit(1)
 }
 
-Write-Error "Config path - filepath: $config."
+Write-Error "Config path - filepath: $($config)."
 
 # Import module
 Import-Module $PSScriptRoot\functions.ps1 -Force
@@ -16,7 +16,7 @@ Import-Module $PSScriptRoot\functions.ps1 -Force
 $clientid = $env:ARM_CLIENT_ID ### add email address of user with admin rights in powerBI
 $clientSecret = ConvertTo-SecureString $env:ARM_CLIENT_SECRET -AsPlainText -Force
 
-Write-Error "ClientID: $config."
+Write-Error "ClientID: $($clientid)."
 
 ## login to power BI
 Install-Module -Name MicrosoftPowerBIMgmt -Scope CurrentUser
