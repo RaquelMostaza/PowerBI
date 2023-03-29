@@ -15,7 +15,10 @@ $clientid = $env:ARM_CLIENT_ID ### add email address of user with admin rights i
 $clientSecret = ConvertTo-SecureString $env:ARM_CLIENT_SECRET -AsPlainText -Force
 
 ## login to power BI
+Get-PSRepository
+Set-PSRepository -Name "PowerBI" -InstallationPolicy Trusted
 Install-Module -Name MicrosoftPowerBIMgmt -Scope CurrentUser
+
 $credential = New-Object System.Management.Automation.PSCredential($clientid, $clientSecret)
 try {
   Connect-PowerBIServiceAccount -Credential $credential -ServicePrincipal -Tenant $tenantId
