@@ -7,8 +7,6 @@ if (!$config) {
   exit(1)
 }
 
-Write-Error "Config path - filepath: $($config)."
-
 # Import module
 Import-Module $PSScriptRoot\functions.ps1 -Force
 
