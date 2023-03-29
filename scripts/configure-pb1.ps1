@@ -7,15 +7,32 @@ if (!$config) {
   exit(1)
 }
 
+Write-Error "Config path - filepath: $config."
+
 # Import module
 Import-Module $PSScriptRoot\functions.ps1 -Force
 
 # Fetch authenitcation from key vault
-# $username = "EMAIL_ADDRESS" ### add email address of user with admin rights in powerBI
-# $password = 'XXXXX' | ConvertTo-SecureString -asPlainText -Force ### add password
+$clientid = $env:ARM_CLIENT_ID ### add email address of user with admin rights in powerBI
+$clientSecret = ConvertTo-SecureString $env:ARM_CLIENT_SECRET -AsPlainText -Force
+
+Write-Error "ClientID: $config."
+
+## login to power BI
+Install-Module -Name MicrosoftPowerBIMgmt -Scope CurrentUser
+$credential = New-Object System.Management.Automation.PSCredential($clientid, $clientSecret)
+try {
+  Connect-PowerBIServiceAccount -Credential $credential -ServicePrincipal -Tenant $tenantId
+}
+catch {
+  Write-Error "Failed to log into Power BI Service as clientId: $($clientid)."
+  exit(1)
+}
+Write-Host "Now logged into Power BI Service as clientId: $($clientid)."
 
 ##### Below code use to fetch pattoken from Keyvault, forthis, add pattoken in keyvault, update config file, and grant Service Connection with permissions to get the secret
 # $pattoken    = (az keyvault secret show --vault-name $config.keyVault.name --name $config.keyVault.pattoken --output json | ConvertFrom-Json).value
+
 $pattoken    = "dapi5cfddc979b24bc3534aec6ff6111db4f-2"
 
 # Log in into Power BI
