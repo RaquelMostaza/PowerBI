@@ -16,7 +16,7 @@ $clientSecret = ConvertTo-SecureString $env:ARM_CLIENT_SECRET -AsPlainText -Forc
 
 ## login to power BI
 Get-PSRepository
-Set-PSRepository -Name "PowerBI" -InstallationPolicy Trusted
+Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
 Install-Module -Name MicrosoftPowerBIMgmt -Scope CurrentUser
 
 $credential = New-Object System.Management.Automation.PSCredential($clientid, $clientSecret)
