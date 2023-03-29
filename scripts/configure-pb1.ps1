@@ -11,10 +11,14 @@ if (!$config) {
 Import-Module $PSScriptRoot\functions.ps1 -Force
 
 # Fetch authenitcation from key vault
-$clientid = "c0a6b74a-26d1-4841-b66a-f449fe5f6296"
-# $clientid = $env:ARM_CLIENT_ID ### add email address of user with admin rights in powerBI
-$clientSecret = ConvertTo-SecureString "j1C8Q~Tvd1A0XgK3BirL2K9GlRKJpp1~SqnVedp9" -AsPlainText -Force
-$tenantId = "16b3c013-d300-468d-ac64-7eda0820b6d3"
+$clientid = $env:ARM_CLIENT_ID ### add email address of user with admin rights in powerBI
+$clientSecret = ConvertTo-SecureString $env:ARM_CLIENT_SECRET -AsPlainText -Force
+$tenantId = $env:AZURE_TENANT_ID
+
+# $clientid = "c0a6b74a-26d1-4841-b66a-f449fe5f6296"
+# $tenantId = "16b3c013-d300-468d-ac64-7eda0820b6d3"
+# $clientSecret = ConvertTo-SecureString "j1C8Q~Tvd1A0XgK3BirL2K9GlRKJpp1~SqnVedp9" -AsPlainText -Force
+
 ## login to power BI
 Get-PSRepository
 Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
@@ -33,7 +37,9 @@ Write-Host "Now logged into Power BI Service as clientId: $($clientid)."
 ##### Below code use to fetch pattoken from Keyvault, forthis, add pattoken in keyvault, update config file, and grant Service Connection with permissions to get the secret
 # $pattoken    = (az keyvault secret show --vault-name $config.keyVault.name --name $config.keyVault.pattoken --output json | ConvertFrom-Json).value
 
-$pattoken    = "dapi5cfddc979b24bc3534aec6ff6111db4f-2"
+$pattoken2    = "dapi5cfddc979b24bc3534aec6ff6111db4f-2"
+
+$pattoken = ConvertTo-SecureString $pattoken2 -AsPlainText -Force
 
 # Log in into Power BI
 # $credential = New-Object System.Management.Automation.PSCredential($username, $password)
