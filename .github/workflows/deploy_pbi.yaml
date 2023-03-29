@@ -42,4 +42,3 @@ jobs:
       - run: 
           ./configure-pb1.ps1
         shell: pwsh
-    needs: [log-in-azure]
