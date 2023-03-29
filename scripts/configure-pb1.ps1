@@ -11,13 +11,11 @@ if (!$config) {
 Import-Module $PSScriptRoot\functions.ps1 -Force
 
 # Fetch authenitcation from key vault
-# $clientid = $env:ARM_CLIENT_ID ### add email address of user with admin rights in powerBI
+$clientid = $env:ARM_CLIENT_ID
 $clientSecret = ConvertTo-SecureString $env:ARM_CLIENT_SECRET -AsPlainText -Force
 $tenantId = $env:ARM_TENANT_ID
 
-$clientid = "c0a6b74a-26d1-4841-b66a-f449fe5f6296"
-# $tenantId = "16b3c013-d300-468d-ac64-7eda0820b6d3"
-# $clientSecret = ConvertTo-SecureString "j1C8Q~Tvd1A0XgK3BirL2K9GlRKJpp1~SqnVedp9" -AsPlainText -Force
+# $clientid = "c0a6b74a-26d1-4841-b66a-f449fe5f6296"
 
 ## login to power BI
 Get-PSRepository
@@ -39,9 +37,9 @@ Write-Host "Now logged into Power BI Service as clientId: $($clientid)."
 
 $pattoken2    = "dapi5cfddc979b24bc3534aec6ff6111db4f-2"
 
-$pattoken = ConvertTo-SecureString $pattoken2 -AsPlainText -Force
-
 # Fetching workspace and report information
+Write-Host "Retrieving information from Workspace: $($config.workspacename)."
+
 $workspace = Get-PowerBIWorkspace -Name $config.workspacename
 
 # knowledge: report with 1 datasource: 1) Databricks
