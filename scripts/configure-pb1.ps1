@@ -13,7 +13,7 @@ Import-Module $PSScriptRoot\functions.ps1 -Force
 # Fetch authenitcation from key vault
 # $clientid = $env:ARM_CLIENT_ID ### add email address of user with admin rights in powerBI
 $clientSecret = ConvertTo-SecureString $env:ARM_CLIENT_SECRET -AsPlainText -Force
-$tenantId = $env:AZURE_TENANT_ID
+$tenantId = $env:ARM_TENANT_ID
 
 $clientid = "c0a6b74a-26d1-4841-b66a-f449fe5f6296"
 # $tenantId = "16b3c013-d300-468d-ac64-7eda0820b6d3"
