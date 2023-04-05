@@ -24,7 +24,8 @@ Install-Module -Name MicrosoftPowerBIMgmt -Scope CurrentUser
 
 $credential = New-Object System.Management.Automation.PSCredential($clientid, $clientSecret)
 try {
-  Connect-PowerBIServiceAccount -Credential $credential -ServicePrincipal -Tenant $tenantId
+#   Connect-PowerBIServiceAccount -Credential $credential -ServicePrincipal -Tenant $tenantId
+    Connect-PowerBIServiceAccount
 }
 catch {
   Write-Error "Failed to log into Power BI Service as clientId: $($clientid)."
